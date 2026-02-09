@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe5ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        h1 { color: #ff4d6d; font-size: 2rem; }
+        .buttons { margin-top: 30px; position: relative; height: 150px; }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; margin-right: 10px; }
+        #noBtn { background-color: #adb5bd; color: white; position: absolute; }
+        .meme-page { display: none; padding: 20px; }
+        .meme-grid img { width: 200px; margin: 10px; border-radius: 15px; }
+        .crying-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainStage" class="container">
+        <h1>Will you be my Valentine? ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="sayYes()">YES!</button>
+            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+        </div>
+    </div>
+
+    <div id="successPage" class="meme-page">
+        <h1 style="color: #ff4d6d;">YAY! You said YES! 🥰</h1>
+        <div class="meme-grid">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueXNidXJueW14bmV3bmV3bmV3bmV3bmV3bmV3bmV3bmV3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCiFJ/giphy.gif">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHRreXJ4bmV3bmV3bmV3bmV3bmV3bmV3bmV3bmV3bmV3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif">
+        </div>
+    </div>
+
+    <div id="cryingArea" class="crying-overlay"></div>
+
+    <script>
+        let yesScale = 1;
+
+        function moveNo() {
+            // Move the No button
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            const btn = document.getElementById('noBtn');
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+
+            // Make YES button grow!
+            yesScale += 0.2;
+            document.getElementById('yesBtn').style.transform = `scale(${yesScale})`;
+
+            // Add crying memes to the background
+            const img = document.createElement('img');
+            img.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3QycXJ4bmV3bmV3bmV3bmV3bmV3bmV3bmV3bmV3bmV3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/OPU6wUKFt8I6BQeLSz/giphy.gif";
+            img.style.position = "absolute";
+            img.style.width = "100px";
+            img.style.left = Math.random() * 90 + "vw";
+            img.style.top = Math.random() * 90 + "vh";
+            document.getElementById('cryingArea').appendChild(img);
+        }
+
+        function sayYes() {
+            // Here you would add your EmailJS code to send the mail
+            document.getElementById('mainStage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'block';
+            document.getElementById('cryingArea').innerHTML = ''; // Clear crying memes
+        }
+    </script>
+</body>
+</html>
