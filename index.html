@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Valentine ❤️</title>
+    <title>A Special Surprise ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -25,12 +25,11 @@
             backdrop-filter: blur(10px);
             padding: 3rem;
             border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(201, 24, 74, 0.2);
+            box-shadow: 0 20px 60px rgba(201, 24, 74, 0.15);
             z-index: 10;
             max-width: 400px;
             width: 85%;
             border: 2px solid white;
-            transition: all 0.5s ease;
         }
 
         h1 {
@@ -54,12 +53,12 @@
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
         #yesBtn {
             background: var(--primary-red);
             color: white;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
             z-index: 100;
         }
 
@@ -70,18 +69,16 @@
             border: 1px solid #eee;
         }
 
-        .success-page { display: none; }
-
-        .big-heart {
-            font-size: 100px;
-            animation: pulse 1.5s infinite;
+        .big-emoji {
+            font-size: 80px;
             display: block;
-            margin: 20px 0;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
 
@@ -96,12 +93,14 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
+
+        #successContent { display: none; }
     </style>
 </head>
 <body>
 
     <div id="proposalCard" class="container">
-        <span class="big-heart">💌</span>
+        <span class="big-emoji">💌</span>
         <h1>Will you be my Valentine?</h1>
         <div class="btn-group" id="btnContainer">
             <button id="yesBtn" onclick="handleYes()">Yes!</button>
@@ -109,15 +108,14 @@
         </div>
     </div>
 
-    <div id="successCard" class="container success-page">
-        <span class="big-heart">💖</span>
+    <div id="successContent" class="container">
+        <span class="big-emoji">💖</span>
         <h1>I love you!</h1>
-        <p style="color: #666; font-size: 1.1rem;">You just made me the happiest person alive! 🎉</p>
-        <div style="font-size: 50px; margin-top: 20px;">👩‍❤️‍👨✨</div>
+        <p style="color: #666; font-size: 1.2rem;">You've made me the happiest person! 🎉</p>
+        <div style="font-size: 40px; margin-top: 20px;">🌹👩‍❤️‍👨✨</div>
     </div>
 
     <script>
-        // Floating emoji generator
         function spawnEmoji(emoji) {
             const el = document.createElement('div');
             el.className = 'floating-emoji';
@@ -129,8 +127,8 @@
             setTimeout(() => el.remove(), 4000);
         }
 
-        // Background hearts
-        setInterval(() => spawnEmoji('❤️'), 500);
+        // Constant floating background hearts
+        setInterval(() => spawnEmoji('❤️'), 600);
 
         let yesScale = 1;
         
@@ -138,27 +136,27 @@
             const noBtn = document.getElementById('noBtn');
             const yesBtn = document.getElementById('yesBtn');
             
-            // Move No Button anywhere on screen
+            // Moves the "No" button anywhere on the screen
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 100);
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
 
-            // Make Yes Button grow
+            // Makes the "Yes" button larger
             yesScale += 0.2;
             yesBtn.style.transform = `scale(${yesScale})`;
 
-            // Visual feedback
+            // Triggers "Crying" emojis
             spawnEmoji('😢');
         }
 
         function handleYes() {
             document.getElementById('proposalCard').style.display = 'none';
-            document.getElementById('successCard').style.display = 'block';
+            document.getElementById('successContent').style.display = 'block';
             
-            // Explosion of celebration
-            for(let i=0; i<40; i++) {
-                setTimeout(() => spawnEmoji('💖'), i * 100);
+            // Celebration shower
+            for(let i=0; i<50; i++) {
+                setTimeout(() => spawnEmoji('💖'), i * 80);
             }
         }
     </script>
